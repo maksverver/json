@@ -1,5 +1,6 @@
 #include "json.h"
 #include <stdio.h>
+#include <string.h>
 
 static char buf[1<<20];                 /* max 1 MB of input */
 
@@ -32,9 +33,38 @@ int main()
     else
     {
         char *out = json_format(&value);
+        if (out == NULL)
+        {
+            printf("Internal error: failed to generate JSON text!\n");
+        }
+        else
+        {
+            printf("<<%s>>\n", out);
+
+            JsonValue value2;
+            if (json_parse(out, &value2) == NULL)
+            {
+                printf("Internal error: failed to parse generated JSON text!\n");
+            }
+            else
+            {
+                char *out2 = json_format(&value2);
+                if (out2 == NULL)
+                {
+                    printf("Internal error: failed to regenerate JSON text!\n");
+                }
+                else
+                {
+                    if (strcmp(out, out2) != 0)
+                    {
+                        printf("Internal error: regenerated JSON text differs!\n");
+                    }
+                    free(out2);
+                }
+                json_destroy_value(&value2);
+            }
+        }
         json_destroy_value(&value);
-        printf("<<%s>>\n", out);
-        free(out);
     }
     return 0;
 }
