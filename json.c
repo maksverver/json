@@ -2,10 +2,6 @@
 #include <string.h>
 #include "json.h"
 
-#ifndef JSON_MAX_NESTING_DEPTH
-#define JSON_MAX_NESTING_DEPTH 1000
-#endif
-
 void json_destroy_value(const JsonValue *value)
 {
     size_t i;

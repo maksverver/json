@@ -17,6 +17,10 @@ Limitations:
 
 #include <stdlib.h>
 
+#ifndef JSON_MAX_NESTING_DEPTH
+#define JSON_MAX_NESTING_DEPTH 1000
+#endif
+
 typedef enum JsonType { JSON_NULL = 0, JSON_BOOLEAN, JSON_NUMBER,
                         JSON_STRING, JSON_ARRAY, JSON_OBJECT } JsonType;
 
