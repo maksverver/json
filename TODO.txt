@@ -1,0 +1,5 @@
+ - json_parse_string() should be merged with decode_string
+ - json_parse_number() should not depend on atof() which is locale-dependent
+ - support custom allocators? (also useful for testing for memory leaks)
+ - more extensive testing would be nice
+ - should test existing unit tests against an existing JSON parser
